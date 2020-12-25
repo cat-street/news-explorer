@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Backdrop from '../Backdrop/Backdrop';
 import Main from '../Main/Main';
@@ -32,9 +32,9 @@ function App() {
     setNewsData(arr);
   };
 
-  const setData = useCallback((arr) => {
+  const setData = (arr) => {
     setCurrentData(arr);
-  }, []);
+  };
 
   const setSearch = (status) => {
     setSearchStatus(status);

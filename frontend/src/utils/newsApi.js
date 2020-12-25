@@ -19,19 +19,4 @@ const newsApi = {
   },
 };
 
-// } async (keyword) => {
-//   const { basePath } = apiConfig;
-//   const today = getDateString(new Date());
-//   const previousDate = calculateDate(-7);
-//   const params =
-// `${apiConfig.parameters}&from=${previousDate}&to=${today}&apiKey=${apiConfig.key}`;
-
-//   const result = await fetch(`${basePath}?q=${keyword}${params}`);
-//   if (result.status.ok) {
-//     return result.json();
-//   }
-//   const { message } = result;
-//   throw new Error(message);
-// };
-
 export default newsApi;
