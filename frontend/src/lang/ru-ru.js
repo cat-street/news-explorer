@@ -36,4 +36,8 @@ const lang = {
   PLACEHOLDER_NAME: 'Введите имя',
 };
 
-export default { lang };
+const errors = {
+  SEARCH: 'Нужно ввести ключевое слово',
+};
+
+export { lang, errors };

@@ -9,7 +9,13 @@ import mockApiData from '../../utils/mockApiData';
 import './Main.css';
 
 function Main({
-  currentData, setData, isLoggedIn, searchStatus, setSearch,
+  newsData,
+  setNews,
+  // currentData,
+  setData,
+  isLoggedIn,
+  searchStatus,
+  setSearch,
 }) {
   useEffect(() => {
     setData(mockApiData.slice(0, 6));
@@ -20,11 +26,11 @@ function Main({
 
   return (
     <main className="main">
-      <Hero setSearch={setSearch} />
+      <Hero setSearch={setSearch} setNews={setNews} />
       {searchStatus === 'searching' && <Preloader />}
       {searchStatus === 'no results' && <NoResults />}
       {searchStatus === 'results' && (
-        <News data={currentData} isLoggedIn={isLoggedIn} more={true}>
+        <News data={newsData} isLoggedIn={isLoggedIn} more={true}>
           <SectionTitle mixinClass="main__title" title="Результаты поиска" />
         </News>
       )}

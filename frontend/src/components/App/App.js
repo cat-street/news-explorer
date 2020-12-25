@@ -12,6 +12,7 @@ import './App.css';
 function App() {
   const [theme, setTheme] = useState('dark');
   const [menuOpened, setMenuOpened] = useState(false);
+  const [newsData, setNewsData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [isLoggedIn, setLoggedIn] = useState(true);
   const [openedPopup, setOpenedPopup] = useState('');
@@ -25,6 +26,10 @@ function App() {
 
   const toggleMenu = (value) => {
     setMenuOpened(value);
+  };
+
+  const setNews = (arr) => {
+    setNewsData(arr);
   };
 
   const setData = useCallback((arr) => {
@@ -84,6 +89,8 @@ function App() {
         </Route>
         <Route path="/">
           <Main
+            newsData={newsData}
+            setNews={setNews}
             currentData={currentData}
             setData={setData}
             isLoggedIn={isLoggedIn}
