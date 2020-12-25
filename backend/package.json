@@ -1,0 +1,51 @@
+{
+  "name": "news-explorer-api",
+  "version": "1.0.0",
+  "description": "News Explorer backend - Yandex Practicum",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon --inspect app.js",
+    "fix": "eslint **/*.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cat-street/news-explorer-api.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "api",
+    "javascript",
+    "backend"
+  ],
+  "author": "Andrey Kudryavtsev <catlogic@ya.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cat-street/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/cat-street/news-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^13.0.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
+    "express-winston": "^4.0.5",
+    "helmet": "^4.2.0",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.4",
+    "validator": "^13.5.1",
+    "winston": "^3.3.3"
+  }
+}
