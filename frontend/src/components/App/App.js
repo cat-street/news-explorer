@@ -16,7 +16,7 @@ function App() {
   const [currentData, setCurrentData] = useState([]);
   const [isLoggedIn, setLoggedIn] = useState(true);
   const [openedPopup, setOpenedPopup] = useState('');
-  const [searchStatus, setSearchStatus] = useState('results');
+  const [searchStatus, setSearchStatus] = useState('');
 
   const history = useHistory();
 

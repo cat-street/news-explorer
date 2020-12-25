@@ -6,6 +6,7 @@ import './NewsCard.css';
 import Tooltip from '../Tooltip/Tooltip';
 
 function NewsCard({
+  url,
   urlToImage,
   publishedAt,
   title,
@@ -34,42 +35,51 @@ function NewsCard({
 
   return (
     <li className="news-card">
-      <img className="news-card__image" src={urlToImage} alt="Sample News" />
+      <a
+        href={url}
+        className="news-card__link"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <img className="news-card__image" src={urlToImage} alt="Sample News" />
 
-      <Switch>
-        <Route path="/saved-news">
-          {keyword && <p className="news-card__tag">{keyword}</p>}
-          <Tooltip bigger forwardedRef={tooltip}>Убрать из сохраненных</Tooltip>
-          <Button
-            onMouseEnter={showTooltip}
-            onMouseLeave={hideTooltip}
-            type="button"
-            buttonClass="button button_type_icon-square button_icon-type_trash"
-          />
-        </Route>
-        <Route path="/">
-          {!isLoggedIn
-            && (<Tooltip forwardedRef={tooltip}>
-              Войдите, чтобы сохранять статьи
-            </Tooltip>)
-          }
-          <Button
-            onMouseEnter={isLoggedIn ? null : showTooltip}
-            onMouseLeave={isLoggedIn ? null : hideTooltip}
-            type="button"
-            buttonClass="button button_type_icon-square button_icon-type_bookmark-normal"
-          />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route path="/saved-news">
+            {keyword && <p className="news-card__tag">{keyword}</p>}
+            <Tooltip bigger forwardedRef={tooltip}>
+              Убрать из сохраненных
+            </Tooltip>
+            <Button
+              onMouseEnter={showTooltip}
+              onMouseLeave={hideTooltip}
+              type="button"
+              buttonClass="button button_type_icon-square button_icon-type_trash"
+            />
+          </Route>
+          <Route path="/">
+            {!isLoggedIn && (
+              <Tooltip forwardedRef={tooltip}>
+                Войдите, чтобы сохранять статьи
+              </Tooltip>
+            )}
+            <Button
+              onMouseEnter={isLoggedIn ? null : showTooltip}
+              onMouseLeave={isLoggedIn ? null : hideTooltip}
+              type="button"
+              buttonClass="button button_type_icon-square button_icon-type_bookmark-normal"
+            />
+          </Route>
+        </Switch>
 
-      <div className="news-card__description">
-        <time className="news-card__date" dateTime={publishedAt}>
-          {formatDate(publishedAt)}
-        </time>
-        <h3 className="news-card__title">{title}</h3>
-        <p className="news-card__text">{description}</p>
-        <p className="news-card__source">{source.name}</p>
-      </div>
+        <div className="news-card__description">
+          <time className="news-card__date" dateTime={publishedAt}>
+            {formatDate(publishedAt)}
+          </time>
+          <h3 className="news-card__title">{title}</h3>
+          <p className="news-card__text">{description}</p>
+          <p className="news-card__source">{source.name}</p>
+        </div>
+      </a>
     </li>
   );
 }
