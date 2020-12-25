@@ -8,10 +8,12 @@
   border-radius: 16px;
 
   background-color: #fff;
+
+  transition: all 200ms ease-out;
 }
 
-.news-card__link {
-  display: block;
+.news-card:hover {
+  box-shadow: 0 0 0 1px #1A1B22;
 }
 
 .news-card__image {
@@ -44,10 +46,17 @@
 }
 
 .news-card__description {
+  display: flex;
+}
+
+.news-card__link {
   padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  text-decoration: none;
+  color: inherit;
 }
 
 .news-card__date {
@@ -118,7 +127,7 @@
     top: 24px;
   }
 
-  .news-card__description {
+  .news-card__link {
     padding: 24px;
   }
 
