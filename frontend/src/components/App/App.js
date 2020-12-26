@@ -63,6 +63,10 @@ function App() {
     setOpenedPopup('');
   };
 
+  const saveToStorage = (data) => {
+    localStorage.setItem('lastResults', JSON.stringify({ data }));
+  };
+
   const getNewsFromApi = async (keyword) => {
     setSearch('searching');
     const data = await newsApi.getData(keyword);
@@ -71,6 +75,7 @@ function App() {
       return;
     }
     setNews(data.articles);
+    saveToStorage(data.articles);
     setData(data.articles.slice(0, 3));
     setSearch('results');
   };

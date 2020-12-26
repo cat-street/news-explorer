@@ -2,7 +2,7 @@ import Button from '../Button/Button';
 import { errors } from '../../lang/ru-ru';
 import './SearchForm.css';
 
-function SearchForm({ getNews, setSearch }) {
+function SearchForm({ getNews, setSearch, resetCounter }) {
   const handleFocus = (evt) => {
     const searchInput = evt.target;
     if (searchInput.value === errors.SEARCH) {
@@ -12,6 +12,7 @@ function SearchForm({ getNews, setSearch }) {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    resetCounter();
     const searchInput = evt.target.search;
     if (searchInput.value === errors.SEARCH) {
       return;

@@ -24,6 +24,10 @@ function Main({
     setData(newsData.slice(0, counter.current));
   };
 
+  const resetCounter = () => {
+    counter.current = 3;
+  };
+
   useEffect(() => {
     setSearch('');
     return () => {
@@ -33,7 +37,7 @@ function Main({
 
   return (
     <main className="main">
-      <Hero setSearch={setSearch} getNews={getNews} />
+      <Hero setSearch={setSearch} getNews={getNews} resetCounter={resetCounter} />
       {searchStatus === 'searching' && <Preloader />}
       {searchStatus === 'no results' && <NoResults type="nothing" />}
       {searchStatus === 'error' && <NoResults type="error" />}

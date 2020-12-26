@@ -20,7 +20,7 @@ function News({
             <NewsCard key={ind} isLoggedIn={isLoggedIn} {...card} />
           ))}
         </ul>
-        {newsData.length > 3 && counter < 100 && (
+        {newsData.length > 3 && counter < newsData.length && (
           <Button
             type="button"
             buttonClass="button_type_text news__button"
