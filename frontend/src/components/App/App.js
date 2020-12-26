@@ -64,20 +64,15 @@ function App() {
   };
 
   const getNewsFromApi = async (keyword) => {
-    try {
-      setSearch('searching');
-      const data = await newsApi.getData(keyword);
-      if (data.articles.length === 0) {
-        setSearch('no results');
-        return;
-      }
-      setNews(data.articles);
-      setData(data.articles.slice(0, 3));
-      setSearch('results');
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
+    setSearch('searching');
+    const data = await newsApi.getData(keyword);
+    if (data.articles.length === 0) {
+      setSearch('no results');
+      return;
     }
+    setNews(data.articles);
+    setData(data.articles.slice(0, 3));
+    setSearch('results');
   };
 
   const login = () => {

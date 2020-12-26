@@ -19,9 +19,14 @@
   color: #1A1B22;
 }
 
+.no-results__title_error {
+  margin-top: 0;
+}
+
 .no-results__text {
   max-width: 320px;
   margin: 0 auto;
+  box-sizing: border-box;
 
   font-size: 18px;
   font-family: 'Roboto', 'Arial', 'Helvetica', sans-serif;
@@ -29,4 +34,15 @@
   line-height: 24px;
   color: #B6BCBF;
   text-align: center;
+}
+
+.no-results__text_error {
+  max-width: 980px;
+  padding: 0 40px;
+}
+
+@media all and (min-width: 520px) {
+  .no-results__text_error {
+    padding: 0 16px;
+  }
 }

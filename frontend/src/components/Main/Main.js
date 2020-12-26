@@ -33,9 +33,10 @@ function Main({
 
   return (
     <main className="main">
-      <Hero setSearch={setSearch} setNews={setNews} getNews={getNews} />
+      <Hero setSearch={setSearch} getNews={getNews} />
       {searchStatus === 'searching' && <Preloader />}
-      {searchStatus === 'no results' && <NoResults />}
+      {searchStatus === 'no results' && <NoResults type="nothing" />}
+      {searchStatus === 'error' && <NoResults type="error" />}
       {searchStatus === 'results' && (
         <News
           newsData={newsData}
