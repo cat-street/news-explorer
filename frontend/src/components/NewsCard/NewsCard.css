@@ -24,6 +24,14 @@
   object-fit: cover;
 }
 
+.news-card__placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #ddd;
+}
+
 .news-card__tag {
   position: absolute;
   left: 16px;

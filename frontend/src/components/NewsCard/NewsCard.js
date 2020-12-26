@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import { months } from '../../lang/ru-ru';
 import './NewsCard.css';
 import Tooltip from '../Tooltip/Tooltip';
+import Logo from '../Logo/Logo';
 
 function NewsCard({
   url,
@@ -37,7 +38,13 @@ function NewsCard({
 
   return (
     <li className="news-card">
-      <img className="news-card__image" src={urlToImage} alt={title} />
+      {urlToImage ? (
+        <img className="news-card__image" src={urlToImage} alt={title} />
+      ) : (
+      <div className="news-card__placeholder">
+        <Logo className="logo_card" />
+      </div>
+      )}
 
       <Switch>
         <Route path="/saved-news">

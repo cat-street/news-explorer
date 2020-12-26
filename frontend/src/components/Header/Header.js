@@ -4,6 +4,7 @@ import Hamburger from '../Hamburger/Hamburger';
 import Container from '../Container/Container';
 import Navigation from '../Navigation/Navigation';
 import backToTop from '../../helpers/backToTop';
+import Logo from '../Logo/Logo';
 import './Header.css';
 
 function Header(props) {
@@ -39,7 +40,7 @@ function Header(props) {
     >
       <Container mixinClass="header__container">
         <Link className="header__logo" to="/" onClick={handleLogoClick}>
-          NewsExplorer
+          <Logo />
         </Link>
         {!openedPopup && <Hamburger {...props} />}
         <Navigation {...props} />
