@@ -1,11 +1,24 @@
 const language = 'ru';
-const pageSize = 100;
-const daysInterval = 7;
+const PAGE_SIZE = 100;
+const DAYS_INTERVAL = 7;
 
 const newsApiConfig = {
-  key: '73d5afb0ad454c49b9be582794c88751',
-  basePath: 'https://newsapi.org/v2/everything',
-  parameters: `&pageSize=${pageSize}&language=${language}&sortBy=publishedAt`,
+  KEY: '73d5afb0ad454c49b9be582794c88751',
+  BASE_PATH: 'https://newsapi.org/v2/everything',
+  PARAMETERS: `&pageSize=${PAGE_SIZE}&language=${language}&sortBy=publishedAt`,
 };
 
-export { newsApiConfig, daysInterval };
+const apiConfig = {
+  BASE_URL: 'https://localhost:3000',
+  HEADERS: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+  CREDENTIALS: 'include',
+};
+
+export {
+  newsApiConfig,
+  DAYS_INTERVAL,
+  apiConfig,
+};

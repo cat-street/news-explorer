@@ -1,16 +1,16 @@
-import { newsApiConfig, daysInterval } from './config';
+import { newsApiConfig, DAYS_INTERVAL } from './config';
 import { getDateString, calculateDate } from './getDate';
 
 const today = getDateString(new Date());
-const previousDate = getDateString(calculateDate(daysInterval));
+const previousDate = getDateString(calculateDate(DAYS_INTERVAL));
 
 const newsApi = {
   newsApiConfig,
   today,
   previousDate,
   getData: async function getData(keyword) {
-    const params = `${this.newsApiConfig.parameters}&from=${this.previousDate}&to=${this.today}&apiKey=${this.newsApiConfig.key}`;
-    const result = await fetch(`${this.newsApiConfig.basePath}?q=${keyword}${params}`);
+    const params = `${this.newsApiConfig.PARAMETERS}&from=${this.previousDate}&to=${this.today}&apiKey=${this.newsApiConfig.KEY}`;
+    const result = await fetch(`${this.newsApiConfig.BASE_PATH}?q=${keyword}${params}`);
     if (result.ok) {
       return result.json();
     }
