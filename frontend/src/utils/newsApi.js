@@ -1,8 +1,8 @@
-import apiConfig from './config';
+import { apiConfig, daysInterval } from './config';
 import { getDateString, calculateDate } from './getDate';
 
 const today = getDateString(new Date());
-const previousDate = getDateString(calculateDate(-7));
+const previousDate = getDateString(calculateDate(daysInterval));
 
 const newsApi = {
   apiConfig,

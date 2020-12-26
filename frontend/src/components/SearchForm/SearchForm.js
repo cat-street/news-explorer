@@ -1,9 +1,8 @@
 import Button from '../Button/Button';
 import { errors } from '../../lang/ru-ru';
-import newsApi from '../../utils/newsApi';
 import './SearchForm.css';
 
-function SearchForm({ setSearch, setNews }) {
+function SearchForm({ getNews }) {
   const handleFocus = (evt) => {
     const searchInput = evt.target;
     if (searchInput.value === errors.SEARCH) {
@@ -21,19 +20,8 @@ function SearchForm({ setSearch, setNews }) {
       searchInput.value = errors.SEARCH;
       return;
     }
-    try {
-      setSearch('searching');
-      const data = await newsApi.getData(evt.target.search.value);
-      if (data.articles.length === 0) {
-        setSearch('no results');
-        return;
-      }
-      setNews(data.articles);
-      setSearch('results');
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
-    }
+    await getNews(searchInput.value);
+    searchInput.closest('form').reset();
   };
 
   return (

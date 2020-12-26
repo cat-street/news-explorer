@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 import Hamburger from '../Hamburger/Hamburger';
 import Container from '../Container/Container';
 import Navigation from '../Navigation/Navigation';
+import backToTop from '../../helpers/backToTop';
 import './Header.css';
 
 function Header(props) {
-  const { theme, menuOpened, openedPopup } = props;
+  const {
+    theme, menuOpened, openedPopup, reset,
+  } = props;
   const header = useRef();
+
+  const handleLogoClick = () => {
+    reset();
+    backToTop();
+  };
 
   const fillHeader = useCallback(() => {
     if (window.scrollY > 56) {
@@ -30,7 +38,7 @@ function Header(props) {
       }`}
     >
       <Container mixinClass="header__container">
-        <Link className="header__logo" to="/">
+        <Link className="header__logo" to="/" onClick={handleLogoClick}>
           NewsExplorer
         </Link>
         {!openedPopup && <Hamburger {...props} />}

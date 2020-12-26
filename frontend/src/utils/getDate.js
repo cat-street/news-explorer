@@ -6,7 +6,7 @@ const getDateString = (date) => {
 };
 
 const calculateDate = (days) => {
-  const utc = Date.now() + days * 24 * 60 * 60 * 1000;
+  const utc = Date.now() - days * 24 * 60 * 60 * 1000;
   return new Date(utc);
 };
 
