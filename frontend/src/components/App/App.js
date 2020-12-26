@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Backdrop from '../Backdrop/Backdrop';
 import Main from '../Main/Main';
@@ -46,14 +46,6 @@ function App() {
     setSearchStatus(status);
   }, []);
 
-  const reset = useCallback(() => {
-    setNewsData([]);
-    setCurrentData([]);
-    setSavedData([]);
-    setSearchStatus('');
-    setOpenedPopup('');
-  }, []);
-
   const openPopup = (popup) => {
     setOpenedPopup(popup);
   };
@@ -66,6 +58,27 @@ function App() {
   const saveToStorage = (data) => {
     localStorage.setItem('lastResults', JSON.stringify({ data }));
   };
+
+  const removeFromStorage = () => {
+    localStorage.removeItem('lastResults');
+  };
+
+  const checkStorage = useCallback(() => {
+    if (localStorage.getItem('lastResults')) {
+      const { data } = JSON.parse(localStorage.getItem('lastResults'));
+      setNewsData(data);
+      setData(data.slice(0, 3));
+      setSearch('results');
+    }
+  }, [setData, setSearch]);
+
+  const reset = useCallback(() => {
+    setNewsData([]);
+    setCurrentData([]);
+    setSearchStatus('');
+    setOpenedPopup('');
+    removeFromStorage();
+  }, []);
 
   const getNewsFromApi = async (keyword) => {
     setSearch('searching');
@@ -89,6 +102,10 @@ function App() {
     setMenuOpened(false);
     history.push('/');
   };
+
+  useEffect(() => {
+    checkStorage();
+  }, [checkStorage]);
 
   return (
     <div className="app">

@@ -50,7 +50,6 @@
   background: url('../../images/bookmark_hover.svg') center center no-repeat, #fff;
 }
 
-.button_icon-type_bookmark-normal:focus,
 .button_icon-type_bookmark-marked {
   background: url('../../images/bookmark_marked.svg') center center no-repeat, #fff;
 }
