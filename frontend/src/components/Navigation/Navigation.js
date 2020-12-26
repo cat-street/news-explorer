@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import backToTop from '../../helpers/backToTop';
 import Button from '../Button/Button';
 import darkExitIcon from '../../images/exit-dark.svg';
 import lightExitIcon from '../../images/exit-light.svg';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './Navigation.css';
 
 function Navigation({
@@ -11,15 +13,17 @@ function Navigation({
   toggleMenu,
   isLoggedIn,
   openPopup,
-  logout,
+  signOut,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+
   const hideMenu = () => {
     toggleMenu(false);
     backToTop();
   };
 
   const handleLoginClick = () => {
-    if (isLoggedIn) logout();
+    if (isLoggedIn) signOut();
     else {
       toggleMenu(false);
       openPopup('login');
@@ -58,12 +62,13 @@ function Navigation({
         )}
       </ul>
       <Button
+        type="button"
         buttonClass={`button button_type_text navigation__button navigation__button_theme_${theme}`}
         onClick={handleLoginClick}
       >
         {isLoggedIn ? (
           <span className="button__logged-in">
-            <span className="button__title">Мария-Антуанетта</span>
+            <span className="button__title">{currentUser.name}</span>
             <img
               className="button__exit-icon"
               src={theme === 'light' ? darkExitIcon : lightExitIcon}

@@ -1,0 +1,12 @@
+.success {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+}
+
+.success__text {
+  margin: 0;
+  padding-top: 16px;
+
+  font-family: inherit;
+  font-size: 18px;
+}

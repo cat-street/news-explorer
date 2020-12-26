@@ -9,7 +9,7 @@ const newsApiConfig = {
 };
 
 const apiConfig = {
-  BASE_URL: 'https://localhost:3000',
+  BASE_URL: 'http://localhost:3001',
   HEADERS: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -17,8 +17,15 @@ const apiConfig = {
   CREDENTIALS: 'include',
 };
 
+const apiRoutes = {
+  SIGNUP: '/signup',
+  SIGNIN: '/signin',
+  SIGNOUT: '/signout',
+};
+
 export {
   newsApiConfig,
   DAYS_INTERVAL,
   apiConfig,
+  apiRoutes,
 };

@@ -8,6 +8,9 @@ import Footer from '../Footer/Footer';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import newsApi from '../../utils/newsApi';
+import mainApi from '../../utils/mainApi';
+import { apiRoutes } from '../../utils/config';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './App.css';
 
 function App() {
@@ -16,9 +19,12 @@ function App() {
   const [savedData, setSavedData] = useState([]);
   const [theme, setTheme] = useState('dark');
   const [menuOpened, setMenuOpened] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [openedPopup, setOpenedPopup] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
+  const [currentUser, setCurrentUser] = useState({ name: '', _id: null });
+  const [newUser, setNewUser] = useState({ email: '', password: '', name: '' });
+  const [apiError, setApiError] = useState('');
 
   const history = useHistory();
 
@@ -93,70 +99,122 @@ function App() {
     setSearch('results');
   };
 
-  const login = () => {
-    setLoggedIn(true);
+  const setUser = (evt) => {
+    const { target } = evt;
+    const { name, value } = target;
+    setNewUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
-  const logout = () => {
+  async function handleRegistration(evt, resetForm) {
+    evt.preventDefault();
+    try {
+      const regStatus = await mainApi.auth(apiRoutes.SIGNUP, newUser);
+      if (regStatus) {
+        resetForm();
+        setApiError('');
+        openPopup('success');
+        setNewUser({
+          email: regStatus.email,
+          password: '',
+          name: regStatus.name,
+        });
+      }
+    } catch (error) {
+      setApiError(error.message);
+    }
+  }
+
+  async function handleSignIn(evt, resetForm) {
+    evt.preventDefault();
+    try {
+      const response = await mainApi.auth(apiRoutes.SIGNIN, newUser);
+      if (response) {
+        resetForm();
+        setApiError('');
+        setCurrentUser({
+          name: response.name,
+          _id: response._id,
+        });
+        setNewUser({ email: '', password: '', name: '' });
+        setLoggedIn(true);
+        setOpenedPopup('');
+      }
+    } catch (error) {
+      setApiError(error.message);
+    }
+  }
+
+  async function signOut() {
+    await mainApi.get(apiRoutes.SIGNOUT);
     setLoggedIn(false);
     setMenuOpened(false);
+    setCurrentUser({
+      name: '',
+      _id: null,
+    });
     history.push('/');
-  };
+  }
 
   useEffect(() => {
     checkStorage();
   }, [checkStorage]);
 
   return (
-    <div className="app">
-      <ScrollToTop />
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <ScrollToTop />
 
-      <Header
-        theme={theme}
-        menuOpened={menuOpened}
-        toggleMenu={toggleMenu}
-        isLoggedIn={isLoggedIn}
-        openPopup={openPopup}
-        openedPopup={openedPopup}
-        reset={reset}
-        login={login}
-        logout={logout}
-      />
-      {menuOpened && <Backdrop closePopup={closePopup} />}
-
-      {openedPopup && (
-        <PopupWithForm
-          openedPopup={openedPopup}
+        <Header
+          theme={theme}
+          menuOpened={menuOpened}
+          toggleMenu={toggleMenu}
+          isLoggedIn={isLoggedIn}
           openPopup={openPopup}
-          closePopup={closePopup}
+          openedPopup={openedPopup}
+          reset={reset}
+          signOut={signOut}
         />
-      )}
+        {menuOpened && <Backdrop closePopup={closePopup} />}
 
-      <Switch>
-        <Route path="/saved-news">
-          <SavedNews
-            setTheme={changeTheme}
-            savedData={savedData}
-            setSaved={setSaved}
-            reset={reset}
+        {openedPopup && (
+          <PopupWithForm
+            openedPopup={openedPopup}
+            openPopup={openPopup}
+            closePopup={closePopup}
+            user={newUser}
+            onChange={setUser}
+            handleRegistration={handleRegistration}
+            handleSignIn={handleSignIn}
+            apiError={apiError}
           />
-        </Route>
-        <Route path="/">
-          <Main
-            newsData={newsData}
-            setNews={setNews}
-            currentData={currentData}
-            setData={setData}
-            isLoggedIn={isLoggedIn}
-            searchStatus={searchStatus}
-            setSearch={setSearch}
-            getNews={getNewsFromApi}
-          />
-        </Route>
-      </Switch>
+        )}
 
-      <Footer />
-    </div>
+        <Switch>
+          <Route path="/saved-news">
+            <SavedNews
+              setTheme={changeTheme}
+              savedData={savedData}
+              setSaved={setSaved}
+              reset={reset}
+            />
+          </Route>
+          <Route path="/">
+            <Main
+              newsData={newsData}
+              setNews={setNews}
+              currentData={currentData}
+              setData={setData}
+              isLoggedIn={isLoggedIn}
+              searchStatus={searchStatus}
+              setSearch={setSearch}
+              getNews={getNewsFromApi}
+            />
+          </Route>
+        </Switch>
+
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

@@ -15,6 +15,8 @@ function NewsCard({
   keyword = '',
   isLoggedIn,
 }) {
+  const tooltip = useRef();
+
   const formatDate = useCallback((value) => {
     const date = new Date(value);
     const day = date.getDate();
@@ -23,7 +25,7 @@ function NewsCard({
     return `${day} ${month}, ${year}`;
   }, []);
 
-  const tooltip = useRef();
+  const cleanDescription = (text) => text.replace(/(http\S+)/g, '');
 
   const showTooltip = () => {
     tooltip.current.classList.add('tooltip_visible');
@@ -35,7 +37,7 @@ function NewsCard({
 
   return (
     <li className="news-card">
-      <img className="news-card__image" src={urlToImage} alt="Sample News" />
+      <img className="news-card__image" src={urlToImage} alt={title} />
 
       <Switch>
         <Route path="/saved-news">
@@ -76,7 +78,7 @@ function NewsCard({
             {formatDate(publishedAt)}
           </time>
           <h3 className="news-card__title">{title}</h3>
-          <p className="news-card__text">{description}</p>
+          <p className="news-card__text">{cleanDescription(description)}</p>
           <p className="news-card__source">{source.name}</p>
         </a>
       </div>

@@ -25,7 +25,10 @@
       "react-app",
       "react-app/jest",
       "airbnb-base"
-    ]
+    ],
+    "rules": {
+      "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    }
   },
   "browserslist": {
     "production": [

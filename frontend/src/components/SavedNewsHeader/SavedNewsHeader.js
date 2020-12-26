@@ -1,14 +1,18 @@
+import { useContext } from 'react';
 import SectionTitle from '../SectionTitle/SectionTitle';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './SavedNewsHeader.css';
 
 function SavedNewsHeader({ savedData }) {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <div className="saved-header">
       <p className="saved-header__sub-title">Сохранённые статьи</p>
       <SectionTitle
         mixinClass="saved-header__title"
         title={
-          `Мария-Антуанетта, у вас ${savedData.length} сохраненных статей`
+          `${currentUser.name}, у вас ${savedData.length} сохраненных статей`
         }
       />
       <p className="saved-header__keywords-text">

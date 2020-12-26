@@ -30,11 +30,7 @@ function SearchForm({ getNews, setSearch, resetCounter }) {
   };
 
   return (
-    <form
-      className="search-form"
-      onSubmit={handleSubmit}
-      noValidate
-    >
+    <form className="search-form" onSubmit={handleSubmit} noValidate>
       <input
         type="text"
         name="search"
