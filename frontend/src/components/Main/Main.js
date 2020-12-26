@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Hero from '../Hero/Hero';
 import Preloader from '../Preloader/Preloader';
 import NoResults from '../NoResults/NoResults';
@@ -27,13 +27,6 @@ function Main({
   const resetCounter = () => {
     counter.current = 3;
   };
-
-  useEffect(() => {
-    setSearch('');
-    return () => {
-      setNews([]);
-    };
-  }, [setSearch, setNews]);
 
   return (
     <main className="main">

@@ -99,13 +99,18 @@ function App() {
     setSearch('results');
   };
 
+  // const getArcicles = async () => {
+  //   const articles = await mainApi.get(apiRoutes.GET_ARTICLES);
+
+  // }
+
   const setUser = (evt) => {
     const { target } = evt;
     const { name, value } = target;
     setNewUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
-  async function handleRegistration(evt, resetForm) {
+  const handleRegistration = async (evt, resetForm) => {
     evt.preventDefault();
     try {
       const regStatus = await mainApi.auth(apiRoutes.SIGNUP, newUser);
@@ -122,9 +127,9 @@ function App() {
     } catch (error) {
       setApiError(error.message);
     }
-  }
+  };
 
-  async function handleSignIn(evt, resetForm) {
+  const handleSignIn = async (evt, resetForm) => {
     evt.preventDefault();
     try {
       const response = await mainApi.auth(apiRoutes.SIGNIN, newUser);
@@ -142,9 +147,9 @@ function App() {
     } catch (error) {
       setApiError(error.message);
     }
-  }
+  };
 
-  async function signOut() {
+  const signOut = async () => {
     await mainApi.get(apiRoutes.SIGNOUT);
     setLoggedIn(false);
     setMenuOpened(false);
@@ -152,12 +157,28 @@ function App() {
       name: '',
       _id: null,
     });
+    reset();
     history.push('/');
-  }
+  };
+
+  const checkCookie = useCallback(async () => {
+    try {
+      const response = await mainApi.get(apiRoutes.SELF);
+      setCurrentUser({
+        name: response.name,
+        _id: response._id,
+      });
+      setLoggedIn(true);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }, []);
 
   useEffect(() => {
+    checkCookie();
     checkStorage();
-  }, [checkStorage]);
+  }, [checkCookie, checkStorage]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -195,7 +216,6 @@ function App() {
               setTheme={changeTheme}
               savedData={savedData}
               setSaved={setSaved}
-              reset={reset}
             />
           </Route>
           <Route path="/">

@@ -4,9 +4,10 @@ const ForbiddenError = require('../errors/forbidden');
 const NotFoundError = require('../errors/not-found');
 const { requestErrors } = require('../constants/error-messages');
 
-const getArticles = async (_req, res, next) => {
+const getArticles = async (req, res, next) => {
   try {
-    const articles = await Article.find({}).sort({ createdAt: -1 });
+    const articles = await Article.find({ owner: req.user._id })
+      .sort({ createdAt: -1 });
     res.send(articles);
   } catch (err) {
     next(err);
@@ -14,15 +15,7 @@ const getArticles = async (_req, res, next) => {
 };
 
 const createArticle = async (req, res, next) => {
-  const {
-    keyword,
-    title,
-    text,
-    date,
-    source,
-    link,
-    image,
-  } = req.body;
+  const { keyword, title, text, date, source, link, image } = req.body;
   const owner = req.user._id;
 
   try {
@@ -49,11 +42,10 @@ const createArticle = async (req, res, next) => {
 const deleteArticle = async (req, res, next) => {
   const { articleId } = req.params;
   try {
-    const article = await Article.findById(articleId)
-      .orFail(() => {
-        throw new NotFoundError(requestErrors.notFound.CARD_MESSAGE);
-      });
-      /** @description Запретить удалять чужие статьи */
+    const article = await Article.findById(articleId).orFail(() => {
+      throw new NotFoundError(requestErrors.notFound.CARD_MESSAGE);
+    });
+    /** @description Запретить удалять чужие статьи */
     if (article.owner.toString() !== req.user._id.toString()) {
       throw new ForbiddenError(requestErrors.forbidden.CARD_MESSAGE);
     }

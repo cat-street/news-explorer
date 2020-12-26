@@ -21,6 +21,8 @@ const apiRoutes = {
   SIGNUP: '/signup',
   SIGNIN: '/signin',
   SIGNOUT: '/signout',
+  SELF: '/users/me',
+  GET_ARTICLES: '/articles/get',
 };
 
 export {

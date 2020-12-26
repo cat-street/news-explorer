@@ -39,11 +39,15 @@ function NewsCard({
   return (
     <li className="news-card">
       {urlToImage ? (
-        <img className="news-card__image" src={urlToImage} alt={title} />
+        <img
+          className="news-card__image"
+          src={urlToImage}
+          alt={title}
+        />
       ) : (
-      <div className="news-card__placeholder">
-        <Logo className="logo_card" />
-      </div>
+        <div className="news-card__placeholder">
+          <Logo className="logo_card" />
+        </div>
       )}
 
       <Switch>

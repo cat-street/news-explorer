@@ -5,7 +5,7 @@ import mockData from '../../utils/mockData';
 import './SavedNews.css';
 
 function SavedNews({
-  setTheme, savedData, setSaved, reset,
+  setTheme, savedData, setSaved,
 }) {
   useEffect(() => {
     setTheme('light');
@@ -15,9 +15,8 @@ function SavedNews({
   }, [setTheme]);
 
   useEffect(() => {
-    reset();
     setSaved(mockData);
-  }, [reset, setSaved]);
+  }, [setSaved]);
 
   return (
     <main className="saved-news">
