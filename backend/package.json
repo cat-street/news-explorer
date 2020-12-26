@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/cat-street/news-explorer-api#readme",
   "devDependencies": {
-    "eslint": "^7.15.0",
+    "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "nodemon": "^2.0.6"
@@ -44,8 +44,8 @@
     "helmet": "^4.2.0",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.4",
-    "validator": "^13.5.1",
+    "mongoose": "^5.11.8",
+    "validator": "^13.5.2",
     "winston": "^3.3.3"
   }
 }
