@@ -41,8 +41,7 @@ function NewsCard({
   };
 
   const handleSave = async () => {
-    const newId = await saveArticle(card);
-    cardElement.current.id = newId._id;
+    await saveArticle(card);
     button.current.classList.add('button_icon-type_bookmark-marked');
   };
 
@@ -90,7 +89,7 @@ function NewsCard({
             onMouseLeave={isLoggedIn ? null : hideTooltip}
             type="button"
             buttonClass="button button_type_icon-square button_icon-type_bookmark-normal"
-            onClick={isLoggedIn && handleSave}
+            onClick={isLoggedIn ? handleSave : undefined}
           />
         </Route>
       </Switch>

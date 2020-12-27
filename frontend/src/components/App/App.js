@@ -112,24 +112,38 @@ function App() {
   };
 
   const getArticles = useCallback(async () => {
-    const articles = await mainApi.get(apiRoutes.ARTICLES);
-    setSavedData(articles);
+    try {
+      const articles = await mainApi.get(apiRoutes.ARTICLES);
+      setSavedData(articles);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err.message);
+    }
   }, []);
 
   const saveArticle = async (article) => {
-    const result = await mainApi.post(apiRoutes.ARTICLES, article);
-    return result;
+    try {
+      await mainApi.post(apiRoutes.ARTICLES, article);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err.message);
+    }
   };
 
   const removeArticle = async (id, cardElement) => {
     const path = `${apiRoutes.ARTICLES}/${id}`;
     const cardEl = cardElement;
-    await mainApi.delete(path);
-    cardEl.current.style.opacity = 0;
-    setTimeout(
-      () => setSavedData(savedData.filter((el) => el._id !== id)),
-      300,
-    );
+    try {
+      await mainApi.delete(path);
+      cardEl.current.style.opacity = 0;
+      setTimeout(
+        () => setSavedData(savedData.filter((el) => el._id !== id)),
+        300,
+      );
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err.message);
+    }
   };
 
   const setUser = (evt) => {
@@ -179,28 +193,33 @@ function App() {
   };
 
   const signOut = async () => {
-    await mainApi.get(apiRoutes.SIGNOUT);
-    setLoggedIn(false);
-    setMenuOpened(false);
-    setCurrentUser({
-      name: '',
-      _id: null,
-    });
-    reset();
-    history.push('/');
+    try {
+      await mainApi.get(apiRoutes.SIGNOUT);
+      setLoggedIn(false);
+      setMenuOpened(false);
+      setCurrentUser({
+        name: '',
+        _id: null,
+      });
+      reset();
+      history.push('/');
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err.message);
+    }
   };
 
   const checkCookie = useCallback(async () => {
     try {
       const response = await mainApi.get(apiRoutes.SELF);
+      setLoggedIn(true);
       setCurrentUser({
         name: response.name,
         _id: response._id,
       });
-      setLoggedIn(true);
-      return response;
-    } catch (error) {
-      return error;
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err.message);
     }
   }, []);
 
@@ -213,6 +232,9 @@ function App() {
     if (history.location.popup) {
       setOpenedPopup(history.location.popup);
     }
+    return () => {
+      setOpenedPopup('');
+    };
   }, [history]);
 
   return (
@@ -258,7 +280,7 @@ function App() {
             setOpenedPopup={setOpenedPopup}
           />
 
-          <Route path="/">
+          <Route exact path="/">
             <Main
               newsData={newsData}
               setNews={setNews}
