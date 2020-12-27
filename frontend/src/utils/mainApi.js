@@ -29,29 +29,15 @@ const mainApi = {
   get: function get(path) {
     return this.fetchData(path);
   },
-  post: function post(path, keyword, article, owner) {
-    const {
-      title,
-      description: text,
-      publishedAt: date,
-      source,
-      url: link,
-      urlToImage: image,
-    } = article;
+  post: function post(path, article) {
     return this.fetchData(
       path,
       'POST',
-      JSON.stringify({
-        keyword,
-        title,
-        text,
-        date,
-        source: source.name,
-        link,
-        image,
-        owner,
-      }),
+      JSON.stringify(article),
     );
+  },
+  delete: function del(path) {
+    return this.fetchData(path, 'DELETE');
   },
 };
 

@@ -7,7 +7,7 @@ const { requestErrors } = require('../constants/error-messages');
 const getArticles = async (req, res, next) => {
   try {
     const articles = await Article.find({ owner: req.user._id })
-      .sort({ createdAt: -1 });
+      .sort({ _id: -1 });
     res.send(articles);
   } catch (err) {
     next(err);

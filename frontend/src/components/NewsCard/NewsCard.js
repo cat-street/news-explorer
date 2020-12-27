@@ -7,16 +7,18 @@ import Tooltip from '../Tooltip/Tooltip';
 import Logo from '../Logo/Logo';
 
 function NewsCard({
-  newsId,
-  keyword,
-  title,
-  text,
-  date,
-  source,
-  link,
-  image,
-  isLoggedIn,
+  card, isLoggedIn, saveArticle, removeArticle,
 }) {
+  const {
+    keyword,
+    title,
+    text,
+    date,
+    source,
+    link,
+    image,
+  } = card;
+  const cardElement = useRef();
   const tooltip = useRef();
 
   const formatDate = useCallback((value) => {
@@ -37,8 +39,17 @@ function NewsCard({
     tooltip.current.classList.remove('tooltip_visible');
   };
 
+  const handleSave = async () => {
+    const newId = await saveArticle(card);
+    cardElement.current.id = newId._id;
+  };
+
+  const handleRemove = () => {
+    removeArticle(card._id, cardElement);
+  };
+
   return (
-    <li className="news-card" id={newsId}>
+    <li className="news-card" ref={cardElement}>
       {image ? (
         <img
           className="news-card__image"
@@ -60,6 +71,7 @@ function NewsCard({
           <Button
             onMouseEnter={showTooltip}
             onMouseLeave={hideTooltip}
+            onClick={handleRemove}
             type="button"
             buttonClass="button button_type_icon-square button_icon-type_trash"
           />
@@ -75,6 +87,7 @@ function NewsCard({
             onMouseLeave={isLoggedIn ? null : hideTooltip}
             type="button"
             buttonClass="button button_type_icon-square button_icon-type_bookmark-normal"
+            onClick={handleSave}
           />
         </Route>
       </Switch>

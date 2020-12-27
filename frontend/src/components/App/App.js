@@ -96,27 +96,40 @@ function App() {
       setSearch('no results');
       return;
     }
-    const newData = await data.articles.map((el, ind) => (
-      {
-        newsId: `${queue}-${ind}`,
-        keyword: queue,
-        title: el.title,
-        text: el.description,
-        date: el.publishedAt,
-        source: el.source.name,
-        link: el.url,
-        image: el.urlToImage,
-      }
-    ));
+    const newData = await data.articles.map((el) => ({
+      keyword: queue,
+      title: el.title,
+      text: el.description,
+      date: el.publishedAt,
+      source: el.source.name,
+      link: el.url,
+      image: el.urlToImage,
+    }));
     setNews(newData);
     saveToStorage(newData);
     setData(newData.slice(0, 3));
     setSearch('results');
   };
 
-  const getArticles = async () => {
+  const getArticles = useCallback(async () => {
     const articles = await mainApi.get(apiRoutes.ARTICLES);
     setSavedData(articles);
+  }, []);
+
+  const saveArticle = async (article) => {
+    const result = await mainApi.post(apiRoutes.ARTICLES, article);
+    return result;
+  };
+
+  const removeArticle = async (id, cardElement) => {
+    const path = `${apiRoutes.ARTICLES}/${id}`;
+    const cardEl = cardElement;
+    await mainApi.delete(path);
+    cardEl.current.style.opacity = 0;
+    setTimeout(
+      () => setSavedData(savedData.filter((el) => el._id !== id)),
+      300,
+    );
   };
 
   const setUser = (evt) => {
@@ -231,6 +244,7 @@ function App() {
               setTheme={changeTheme}
               savedData={savedData}
               getArticles={getArticles}
+              removeArticle={removeArticle}
             />
           </Route>
           <Route path="/">
@@ -244,6 +258,7 @@ function App() {
               setSearch={setSearch}
               getNews={getNewsFromApi}
               saveKeyword={saveKeyword}
+              saveArticle={saveArticle}
             />
           </Route>
         </Switch>

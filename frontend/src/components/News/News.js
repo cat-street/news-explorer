@@ -7,6 +7,8 @@ function News({
   newsData = [],
   currentData,
   isLoggedIn,
+  saveArticle,
+  removeArticle,
   counter,
   showMore,
   children,
@@ -17,7 +19,13 @@ function News({
         {children}
         <ul className="news__grid">
           {currentData.map((card, ind) => (
-            <NewsCard key={card._id || ind} isLoggedIn={isLoggedIn} {...card} />
+            <NewsCard
+              key={card._id || ind}
+              isLoggedIn={isLoggedIn}
+              saveArticle={saveArticle}
+              removeArticle={removeArticle}
+              card={card}
+            />
           ))}
         </ul>
         {newsData.length > 3 && counter < newsData.length && (
