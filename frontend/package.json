@@ -54,7 +54,6 @@
   "bugs": {
     "url": "https://github.com/cat-street/news-explorer/issues"
   },
-  "homepage": "https://github.com/cat-street/news-explorer#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cat-street/news-explorer.git"
