@@ -24,7 +24,7 @@ function SavedNewsHeader({ savedData, keywords, setKeywords }) {
         По ключевым словам:{' '}
         {keywords[0] && (<span className="saved-header__keyword">{keywords[0]}</span>)}
         {keywords[1] && (<>, <span className="saved-header__keyword">{keywords[1]}</span></>)}
-        {keywords[1] && (<> и <span className="saved-header__keyword">{keywords[2]}</span></>)}
+        {keywords[2] && (<> и <span className="saved-header__keyword">{keywords[2]}</span></>)}
       </p>
     </div>
   );

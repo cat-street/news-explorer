@@ -40,7 +40,7 @@ const validatePost = celebrate({
         'any.required': validationErrors.requiredField(keywords.LINK),
         'string.empty': validationErrors.emptyField(keywords.LINK),
       }),
-    image: Joi.string().trim().required()
+    image: Joi.string().trim().allow('').required()
       .custom((value, helpers) => {
         if (urlValidator(value)) {
           return value;

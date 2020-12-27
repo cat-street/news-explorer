@@ -33,9 +33,14 @@ const articleSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, validationErrors.requiredField(keywords.IMAGE)],
+    required: false,
     validate: {
-      validator: urlValidator,
+      validator: (value) => {
+        if (value === '') {
+          return true;
+        }
+        return urlValidator(value);
+      },
       message: validationErrors.url.INVALID,
     },
   },
