@@ -7,26 +7,27 @@ import Tooltip from '../Tooltip/Tooltip';
 import Logo from '../Logo/Logo';
 
 function NewsCard({
-  url,
-  urlToImage,
-  publishedAt,
+  newsId,
+  keyword,
   title,
-  description,
+  text,
+  date,
   source,
-  keyword = '',
+  link,
+  image,
   isLoggedIn,
 }) {
   const tooltip = useRef();
 
   const formatDate = useCallback((value) => {
-    const date = new Date(value);
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
+    const newDate = new Date(value);
+    const day = newDate.getDate();
+    const month = months[newDate.getMonth()];
+    const year = newDate.getFullYear();
     return `${day} ${month}, ${year}`;
   }, []);
 
-  const cleanDescription = (text) => text.replace(/(http\S+)/g, '');
+  const cleanDescription = (txt) => txt.replace(/(http\S+)/g, '');
 
   const showTooltip = () => {
     tooltip.current.classList.add('tooltip_visible');
@@ -37,11 +38,11 @@ function NewsCard({
   };
 
   return (
-    <li className="news-card">
-      {urlToImage ? (
+    <li className="news-card" id={newsId}>
+      {image ? (
         <img
           className="news-card__image"
-          src={urlToImage}
+          src={image}
           alt={title}
         />
       ) : (
@@ -80,17 +81,17 @@ function NewsCard({
 
       <div className="news-card__description">
         <a
-          href={url}
+          href={link}
           className="news-card__link"
           target="_blank"
           rel="noreferrer noopener"
         >
-          <time className="news-card__date" dateTime={publishedAt}>
-            {formatDate(publishedAt)}
+          <time className="news-card__date" dateTime={date}>
+            {formatDate(date)}
           </time>
           <h3 className="news-card__title">{title}</h3>
-          <p className="news-card__text">{cleanDescription(description)}</p>
-          <p className="news-card__source">{source.name}</p>
+          <p className="news-card__text">{cleanDescription(text)}</p>
+          <p className="news-card__source">{source}</p>
         </a>
       </div>
     </li>

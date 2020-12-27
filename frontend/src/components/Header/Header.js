@@ -9,14 +9,9 @@ import './Header.css';
 
 function Header(props) {
   const {
-    theme, menuOpened, openedPopup, reset,
+    theme, menuOpened, openedPopup,
   } = props;
   const header = useRef();
-
-  const handleLogoClick = () => {
-    reset();
-    backToTop();
-  };
 
   const fillHeader = useCallback(() => {
     if (window.scrollY > 56) {
@@ -39,7 +34,7 @@ function Header(props) {
       }`}
     >
       <Container mixinClass="header__container">
-        <Link className="header__logo" to="/" onClick={handleLogoClick}>
+        <Link className="header__logo" to="/" onClick={backToTop}>
           <Logo />
         </Link>
         {!openedPopup && <Hamburger {...props} />}

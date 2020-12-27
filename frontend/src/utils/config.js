@@ -22,7 +22,7 @@ const apiRoutes = {
   SIGNIN: '/signin',
   SIGNOUT: '/signout',
   SELF: '/users/me',
-  GET_ARTICLES: '/articles/get',
+  ARTICLES: '/articles',
 };
 
 export {

@@ -20,18 +20,38 @@ const mainApi = {
     throw new Error(message);
   },
   auth: function auth(path, user) {
-    const userData = { ...user };
-    if (!userData.name) {
-      delete userData.name;
-    }
     return this.fetchData(
       path,
       'POST',
-      JSON.stringify(userData),
+      JSON.stringify(user),
     );
   },
   get: function get(path) {
     return this.fetchData(path);
+  },
+  post: function post(path, keyword, article, owner) {
+    const {
+      title,
+      description: text,
+      publishedAt: date,
+      source,
+      url: link,
+      urlToImage: image,
+    } = article;
+    return this.fetchData(
+      path,
+      'POST',
+      JSON.stringify({
+        keyword,
+        title,
+        text,
+        date,
+        source: source.name,
+        link,
+        image,
+        owner,
+      }),
+    );
   },
 };
 

@@ -13,8 +13,6 @@ function Main({
   currentData,
   setData,
   searchStatus,
-  setSearch,
-  getNews,
   ...props
 }) {
   const counter = useRef(3);
@@ -30,7 +28,7 @@ function Main({
 
   return (
     <main className="main">
-      <Hero setSearch={setSearch} getNews={getNews} resetCounter={resetCounter} />
+      <Hero resetCounter={resetCounter} {...props} />
       {searchStatus === 'searching' && <Preloader />}
       {searchStatus === 'no results' && <NoResults type="nothing" />}
       {searchStatus === 'error' && <NoResults type="error" />}

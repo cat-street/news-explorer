@@ -17,6 +17,8 @@ function App() {
   const [newsData, setNewsData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [savedData, setSavedData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [keyword, setKeyword] = useState('');
   const [theme, setTheme] = useState('dark');
   const [menuOpened, setMenuOpened] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -44,8 +46,8 @@ function App() {
     setCurrentData(arr);
   }, []);
 
-  const setSaved = useCallback((arr) => {
-    setSavedData(arr);
+  const saveKeyword = useCallback((word) => {
+    setKeyword(word);
   }, []);
 
   const setSearch = useCallback((status) => {
@@ -83,26 +85,39 @@ function App() {
     setCurrentData([]);
     setSearchStatus('');
     setOpenedPopup('');
+    setKeyword('');
     removeFromStorage();
   }, []);
 
-  const getNewsFromApi = async (keyword) => {
+  const getNewsFromApi = async (queue) => {
     setSearch('searching');
-    const data = await newsApi.getData(keyword);
+    const data = await newsApi.getData(queue);
     if (data.articles.length === 0) {
       setSearch('no results');
       return;
     }
-    setNews(data.articles);
-    saveToStorage(data.articles);
-    setData(data.articles.slice(0, 3));
+    const newData = await data.articles.map((el, ind) => (
+      {
+        newsId: `${queue}-${ind}`,
+        keyword: queue,
+        title: el.title,
+        text: el.description,
+        date: el.publishedAt,
+        source: el.source.name,
+        link: el.url,
+        image: el.urlToImage,
+      }
+    ));
+    setNews(newData);
+    saveToStorage(newData);
+    setData(newData.slice(0, 3));
     setSearch('results');
   };
 
-  // const getArcicles = async () => {
-  //   const articles = await mainApi.get(apiRoutes.GET_ARTICLES);
-
-  // }
+  const getArticles = async () => {
+    const articles = await mainApi.get(apiRoutes.ARTICLES);
+    setSavedData(articles);
+  };
 
   const setUser = (evt) => {
     const { target } = evt;
@@ -131,8 +146,9 @@ function App() {
 
   const handleSignIn = async (evt, resetForm) => {
     evt.preventDefault();
+    const { name, ...user } = newUser;
     try {
-      const response = await mainApi.auth(apiRoutes.SIGNIN, newUser);
+      const response = await mainApi.auth(apiRoutes.SIGNIN, user);
       if (response) {
         resetForm();
         setApiError('');
@@ -192,7 +208,6 @@ function App() {
           isLoggedIn={isLoggedIn}
           openPopup={openPopup}
           openedPopup={openedPopup}
-          reset={reset}
           signOut={signOut}
         />
         {menuOpened && <Backdrop closePopup={closePopup} />}
@@ -215,7 +230,7 @@ function App() {
             <SavedNews
               setTheme={changeTheme}
               savedData={savedData}
-              setSaved={setSaved}
+              getArticles={getArticles}
             />
           </Route>
           <Route path="/">
@@ -228,6 +243,7 @@ function App() {
               searchStatus={searchStatus}
               setSearch={setSearch}
               getNews={getNewsFromApi}
+              saveKeyword={saveKeyword}
             />
           </Route>
         </Switch>
