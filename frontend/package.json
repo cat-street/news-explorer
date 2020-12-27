@@ -1,6 +1,6 @@
 {
   "name": "news-explorer-frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
@@ -41,5 +41,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "keywords": [
+    "react",
+    "css",
+    "api",
+    "javascript",
+    "frontend"
+  ],
+  "author": "Andrey Kudryavtsev <catlogic@ya.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cat-street/news-explorer/issues"
+  },
+  "homepage": "https://github.com/cat-street/news-explorer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cat-street/news-explorer.git"
   }
 }
