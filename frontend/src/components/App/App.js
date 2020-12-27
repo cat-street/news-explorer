@@ -1,5 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import {
+  Redirect, Route, Switch, useHistory,
+} from 'react-router-dom';
 import Backdrop from '../Backdrop/Backdrop';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
@@ -11,6 +13,7 @@ import newsApi from '../../utils/newsApi';
 import mainApi from '../../utils/mainApi';
 import { apiRoutes } from '../../utils/config';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 
 function App() {
@@ -18,16 +21,19 @@ function App() {
   const [currentData, setCurrentData] = useState([]);
   const [savedData, setSavedData] = useState([]);
   const [keywords, setKeywords] = useState([]);
-  const [theme, setTheme] = useState('dark');
-  const [menuOpened, setMenuOpened] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [openedPopup, setOpenedPopup] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
-  const [currentUser, setCurrentUser] = useState({ name: '', _id: null });
-  const [newUser, setNewUser] = useState({ email: '', password: '', name: '' });
   const [apiError, setApiError] = useState('');
 
   const history = useHistory();
+  // const location = useLocation();
+
+  const [theme, setTheme] = useState('dark');
+  const [menuOpened, setMenuOpened] = useState(false);
+  const [openedPopup, setOpenedPopup] = useState('');
+
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ name: '', _id: null });
+  const [newUser, setNewUser] = useState({ email: '', password: '', name: '' });
 
   const changeTheme = (value) => {
     setTheme(value);
@@ -201,7 +207,13 @@ function App() {
   useEffect(() => {
     checkCookie();
     checkStorage();
-  }, [checkCookie, checkStorage]);
+  }, [checkCookie, checkStorage, history]);
+
+  useEffect(() => {
+    if (history.location.popup) {
+      setOpenedPopup(history.location.popup);
+    }
+  }, [history]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -233,16 +245,19 @@ function App() {
         )}
 
         <Switch>
-          <Route path="/saved-news">
-            <SavedNews
-              setTheme={changeTheme}
-              savedData={savedData}
-              getArticles={getArticles}
-              removeArticle={removeArticle}
-              keywords={keywords}
-              setKeywords={setKeywords}
-            />
-          </Route>
+          <ProtectedRoute
+            path="/saved-news"
+            isLoggedIn={isLoggedIn}
+            component={SavedNews}
+            setTheme={changeTheme}
+            savedData={savedData}
+            getArticles={getArticles}
+            removeArticle={removeArticle}
+            keywords={keywords}
+            setKeywords={setKeywords}
+            setOpenedPopup={setOpenedPopup}
+          />
+
           <Route path="/">
             <Main
               newsData={newsData}
@@ -255,6 +270,10 @@ function App() {
               getNews={getNewsFromApi}
               saveArticle={saveArticle}
             />
+          </Route>
+
+          <Route path="*">
+            <Redirect to="/" />
           </Route>
         </Switch>
 

@@ -6,12 +6,10 @@ import Button from '../Button/Button';
 function News({
   newsData = [],
   currentData,
-  isLoggedIn,
-  saveArticle,
-  removeArticle,
   counter,
   showMore,
   children,
+  ...props
 }) {
   return (
     <section className="news">
@@ -21,10 +19,8 @@ function News({
           {currentData.map((card, ind) => (
             <NewsCard
               key={card._id || ind}
-              isLoggedIn={isLoggedIn}
-              saveArticle={saveArticle}
-              removeArticle={removeArticle}
               card={card}
+              { ...props }
             />
           ))}
         </ul>
