@@ -7,10 +7,12 @@ function Button({
   onMouseEnter,
   onMouseLeave,
   disabled = false,
+  forwardedRef,
   children,
 }) {
   return (
     <button
+      ref={forwardedRef}
       type={type}
       className={`button ${buttonClass}`}
       onClick={onClick}

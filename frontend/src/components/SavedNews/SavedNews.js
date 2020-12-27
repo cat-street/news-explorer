@@ -4,7 +4,12 @@ import News from '../News/News';
 import './SavedNews.css';
 
 function SavedNews({
-  setTheme, savedData, getArticles, removeArticle,
+  setTheme,
+  savedData,
+  getArticles,
+  removeArticle,
+  keywords,
+  setKeywords,
 }) {
   useEffect(() => {
     setTheme('light');
@@ -19,7 +24,11 @@ function SavedNews({
 
   return (
     <main className="saved-news">
-      <SavedNewsHeader savedData={savedData} />
+      <SavedNewsHeader
+        savedData={savedData}
+        keywords={keywords}
+        setKeywords={setKeywords}
+      />
       <News currentData={savedData} removeArticle={removeArticle} />
     </main>
   );

@@ -2,9 +2,7 @@ import Button from '../Button/Button';
 import { errors } from '../../lang/ru-ru';
 import './SearchForm.css';
 
-function SearchForm({
-  getNews, setSearch, resetCounter, saveKeyword,
-}) {
+function SearchForm({ getNews, setSearch, resetCounter }) {
   const handleFocus = (evt) => {
     const searchInput = evt.target;
     if (searchInput.value === errors.SEARCH) {
@@ -25,7 +23,6 @@ function SearchForm({
     }
     try {
       await getNews(searchInput.value);
-      saveKeyword(searchInput.value);
     } catch (err) {
       setSearch('error');
     }

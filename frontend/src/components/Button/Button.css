@@ -50,7 +50,8 @@
   background: url('../../images/bookmark_hover.svg') center center no-repeat, #fff;
 }
 
-.button_icon-type_bookmark-marked {
+.button_icon-type_bookmark-marked,
+.button_icon-type_bookmark-marked:hover {
   background: url('../../images/bookmark_marked.svg') center center no-repeat, #fff;
 }
 

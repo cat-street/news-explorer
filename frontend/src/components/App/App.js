@@ -17,8 +17,7 @@ function App() {
   const [newsData, setNewsData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [savedData, setSavedData] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [keyword, setKeyword] = useState('');
+  const [keywords, setKeywords] = useState([]);
   const [theme, setTheme] = useState('dark');
   const [menuOpened, setMenuOpened] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -44,10 +43,6 @@ function App() {
 
   const setData = useCallback((arr) => {
     setCurrentData(arr);
-  }, []);
-
-  const saveKeyword = useCallback((word) => {
-    setKeyword(word);
   }, []);
 
   const setSearch = useCallback((status) => {
@@ -85,7 +80,6 @@ function App() {
     setCurrentData([]);
     setSearchStatus('');
     setOpenedPopup('');
-    setKeyword('');
     removeFromStorage();
   }, []);
 
@@ -103,7 +97,7 @@ function App() {
       date: el.publishedAt,
       source: el.source.name,
       link: el.url,
-      image: el.urlToImage,
+      image: el.urlToImage ? el.urlToImage : '',
     }));
     setNews(newData);
     saveToStorage(newData);
@@ -245,6 +239,8 @@ function App() {
               savedData={savedData}
               getArticles={getArticles}
               removeArticle={removeArticle}
+              keywords={keywords}
+              setKeywords={setKeywords}
             />
           </Route>
           <Route path="/">
@@ -257,7 +253,6 @@ function App() {
               searchStatus={searchStatus}
               setSearch={setSearch}
               getNews={getNewsFromApi}
-              saveKeyword={saveKeyword}
               saveArticle={saveArticle}
             />
           </Route>

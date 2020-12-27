@@ -20,6 +20,7 @@ function NewsCard({
   } = card;
   const cardElement = useRef();
   const tooltip = useRef();
+  const button = useRef();
 
   const formatDate = useCallback((value) => {
     const newDate = new Date(value);
@@ -42,6 +43,7 @@ function NewsCard({
   const handleSave = async () => {
     const newId = await saveArticle(card);
     cardElement.current.id = newId._id;
+    button.current.classList.add('button_icon-type_bookmark-marked');
   };
 
   const handleRemove = () => {
@@ -83,6 +85,7 @@ function NewsCard({
             </Tooltip>
           )}
           <Button
+            forwardedRef={button}
             onMouseEnter={isLoggedIn ? null : showTooltip}
             onMouseLeave={isLoggedIn ? null : hideTooltip}
             type="button"
