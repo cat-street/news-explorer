@@ -67,7 +67,8 @@ const login = async (req, res, next) => {
       .cookie('jwt', token, {
         maxAge: 604800000,
         httpOnly: true,
-        sameSite: true,
+        secure: true,
+        sameSite: 'none',
       })
       .send(user);
   } catch (err) {
@@ -81,7 +82,8 @@ const logout = async (_req, res, next) => {
       .cookie('jwt', '', {
         maxAge: -1,
         httpOnly: true,
-        sameSite: true,
+        secure: true,
+        sameSite: 'none',
       })
       .send({ message: 'Logged out' });
   } catch (err) {

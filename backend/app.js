@@ -25,7 +25,7 @@ mongoose.connect(MONGO_URL || MONGO_DEV_URL, {
 });
 
 app.use('*', cors({
-  origin: '*',
+  origin: ['http://localhost:3000', 'https://news.catlogic.ru'],
   credentials: true,
 }));
 
