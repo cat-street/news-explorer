@@ -9,7 +9,7 @@ const newsApiConfig = {
 };
 
 const apiConfig = {
-  BASE_URL: 'http://localhost:3001',
+  BASE_URL: 'https://api.news.catlogic.ru',
   HEADERS: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

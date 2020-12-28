@@ -25,7 +25,7 @@ mongoose.connect(MONGO_URL || MONGO_DEV_URL, {
 });
 
 app.use('*', cors({
-  origin: 'http://localhost:3000',
+  origin: '*',
   credentials: true,
 }));
 
