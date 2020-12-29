@@ -4,7 +4,7 @@ function ProtectedRoute({
   isLoggedIn, component: Component, ...props
 }) {
   return (
-    <Route>
+    <Route exact path="/saved-news">
       {
         () => (isLoggedIn ? <Component {...props} />
           : <Redirect to={{

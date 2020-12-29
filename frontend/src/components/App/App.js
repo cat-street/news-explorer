@@ -25,7 +25,6 @@ function App() {
   const [apiError, setApiError] = useState('');
 
   const history = useHistory();
-  // const location = useLocation();
 
   const [theme, setTheme] = useState('dark');
   const [menuOpened, setMenuOpened] = useState(false);
@@ -268,6 +267,7 @@ function App() {
 
         <Switch>
           <ProtectedRoute
+            exact
             path="/saved-news"
             isLoggedIn={isLoggedIn}
             component={SavedNews}
@@ -277,7 +277,8 @@ function App() {
             removeArticle={removeArticle}
             keywords={keywords}
             setKeywords={setKeywords}
-            setOpenedPopup={setOpenedPopup}
+            // setOpenedPopup={setOpenedPopup}
+            checkCookie={checkCookie}
           />
 
           <Route exact path="/">
