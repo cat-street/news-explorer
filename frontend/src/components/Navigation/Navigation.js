@@ -70,7 +70,7 @@ function Navigation({
           </li>
         )}
         <li className="navigation__item">
-          <button className="button" onClick={handleLanguageClick}>
+          <button className="button navigation__language-button" onClick={handleLanguageClick}>
             {currentUser.lang}
           </button>
         </li>

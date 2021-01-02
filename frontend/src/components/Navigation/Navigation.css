@@ -88,6 +88,23 @@
   border-color: #fff;
 }
 
+.navigation__language-button {
+  height: 56px;
+  padding: 2px;
+  box-sizing: border-box;
+
+  background-color: transparent;
+  color: inherit;
+  opacity: .75;
+
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.navigation__language-button:hover {
+  opacity: 1;
+}
+
 @media all and (min-width: 520px) {
   .navigation {
     display: flex;
@@ -152,6 +169,10 @@
     max-width: 220px;
     margin: 0;
     padding: 8px 12px;
+  }
+
+  .navigation__language-button {
+    height: auto;
   }
 }
 
