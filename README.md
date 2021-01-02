@@ -1,26 +1,50 @@
-# Дипломная работа: News Explorer
-**Яндекс Практикум**
+# The News Explorer
+**Yandex Practicum final graduation project**
 
-![Превью News Explorer](./gh_news.png)
+![News Explorer Preview](./gh_news.png)
 
-News Explorer - одностраничное приложение для поиска новостей по ключевым словам, с возможностью регистрации и сохранения новостей в "избранное". Дипломная работа студента на курсе Яндекс Практикума "Веб-разработчик". Фронтэнд/бэкенд, MERN-функционал.
+News Explorer is a single page application to search global news by search keywords using News API. The application also includes registration/authorization functionality with the ability for users to bookmark news cards. This app is a final graduation project at 'Web Developer' program at [Yandex Practicum](https://practicum.yandex.com/) coding school. Includes frontend and backend (MERN stack).
+
+* Current live version at [https://news.catlogic.ru/](https://news.catlogic.ru/)
 
 ---
-## Технологии
+## Technology used
 
-* Верстка - семантический **HTML5**, стили - **CSS3** (в том числе Flexbox, Grid, transitions). Микроанимации элементов. Модель структуры и именования элементов по методологии **БЭМ**.
-* Логика - **JavaScript ES6** (функциональный подход, async/await, fetch API).
-* Фронтенд - **React**, функциональные компоненты.
-  * Функции Context, Ref, Redirect, Route, Switch.
-  * Хуки useState, useEffect, useContext, useRef, useCallback, useHistory.
-  * Авторизация, валидация на фронтенде, защита роутов, использование состояния компонентов.
-  * Использование LocalStorage для хранения данных между сессиями.
-  * Сборка с применением Create React App.
-* Фронтенд адаптирован под различные устройства - поддерживается разрешение экрана от 320 до 1280 и более пикселей по ширине.
-* Бэкенд - **Node.js/Express.js**. API реализован по принципам REST для работы с базой данных, аутентификации/авторизации.
-  * Хранение и работа с данными - **MongoDB**, использование schema, CRUD-операций. Для работы с Node использован *Mongoose*.
-  * Применяется валидация поступающих данных (в том числе с помощью node-модулей *validator*, *joi/celebrate*).
-  * Для авторизации используется серверный куки с зашифрованным JWT-токеном.
-  * Ведутся логи доступа и ошибок при помощи модуля *winston*.
-  * Реализована централизованная обработка ошибок с отправкой корректных статусов и сообщений о ошибках на запросы.
-* Код стандартизирован при помощи ESLint в конфигурации airbnb-base.
+### Frontend
+
+* HTML/CSS
+* React (+ react-dom, react-router)
+* JavaScript (ES6)
+* I18next (multiple language support)
+
+### Backend
+* Node.js/Express.js
+* MongoDB
+* Node/Express libraries
+
+### Additional info
+* Semantic and accessible HTML, modern CSS (Flexbox, Grid, transitions).
+* Fully responsive layout, optimized for screen resolution from 320px by width.
+* JavaScript ES6 (async/await, fetch API).
+* React frontend:
+  * Functional components.
+  * Context, Ref, Redirect, Route, Switch functions.
+  * useState, useEffect, useContext, useRef, useCallback, useHistory hooks.
+  * Authorization, frontend validation, protected 'bookmarks' route (unreachable for unregistered users).
+  * Global context used for storing user data.
+  * Fetching and processing data from News API.
+  * Saving data to local API.
+  * Utilizing LocalStorage to save search data between sessions.
+  * *I18next* framework used for English/Russian localization.
+* Node/Express backend:
+  * *REST API*, saving/fetching data, user registration/authorization.
+  * Data stored in local MongoDB (schema, CRUD) using *Mongoose*.
+  * Multiple stages of data validation (*validator*, *joi/celebrate*).
+  * Password data is encrypted using *bcryptjs*.
+  * Server cookie with secure JWT token used for authentication.
+  * Access & error logging using *winston*.
+  * Authentication-protected routes.
+  * Centralized middleware for errors handling with correct status and message responses.
+  * Secure headers by *helmet*
+  * Request *rate limit* middleware
+* Code style by *ESLint* in *airbnb-base* config.
