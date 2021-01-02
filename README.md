@@ -5,7 +5,7 @@
 
 News Explorer is a single page application to search global news by search keywords using News API. The application also includes registration/authorization functionality with the ability for users to bookmark news cards. This app is a final graduation project at 'Web Developer' program at [Yandex Practicum](https://practicum.yandex.com/) coding school. Includes frontend and backend (MERN stack).
 
-* Current live version at <a href="https://news.catlogic.ru/" target="_blank" rel="noreferrer noopener">https://news.catlogic.ru/</a>
+* Current live version at <a href="https://news.catlogic.ru/" target="_blank" rel="noreferrer noopener">news.catlogic.ru</a>
 
 ---
 ## Technology used
