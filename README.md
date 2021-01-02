@@ -1,4 +1,4 @@
-# The News Explorer
+# News Explorer
 **Yandex Practicum final graduation project**
 
 ![News Explorer Preview](./gh_news.png)
