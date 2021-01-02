@@ -277,7 +277,6 @@ function App() {
             removeArticle={removeArticle}
             keywords={keywords}
             setKeywords={setKeywords}
-            // setOpenedPopup={setOpenedPopup}
             checkCookie={checkCookie}
           />
 

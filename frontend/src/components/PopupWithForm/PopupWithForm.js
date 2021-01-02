@@ -1,3 +1,4 @@
+import { useEffect, useCallback } from 'react';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Success from '../Success/Success';
@@ -11,6 +12,24 @@ function PopupWithForm({
       closePopup();
     }
   };
+
+  const handleEscClose = useCallback(
+    (evt) => {
+      if (evt.key === 'Escape') {
+        closePopup();
+      }
+    },
+    [closePopup],
+  );
+
+  useEffect(() => {
+    if (openedPopup) {
+      document.addEventListener('keydown', handleEscClose);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscClose);
+    };
+  }, [openedPopup, handleEscClose]);
 
   return (
     <>

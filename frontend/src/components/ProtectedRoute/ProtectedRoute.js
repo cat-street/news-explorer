@@ -6,11 +6,12 @@ function ProtectedRoute({
   return (
     <Route exact path="/saved-news">
       {
-        () => (isLoggedIn ? <Component {...props} />
-          : <Redirect to={{
-            pathname: '/',
-            popup: 'login',
-          }}/>)
+        () => {
+          if (isLoggedIn) {
+            return (<Component {...props} />);
+          }
+          return (<Redirect to={{ pathname: '/', popup: 'login' }}/>);
+        }
       }
     </Route>
   );
