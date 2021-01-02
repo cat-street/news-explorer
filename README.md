@@ -48,3 +48,4 @@ News Explorer is a single page application to search global news by search keywo
   * Secure headers by *helmet*
   * Request *rate limit* middleware
 * Code style by *ESLint* in *airbnb-base* config.
+* Naming & components structure by *BEM*.
