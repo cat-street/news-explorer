@@ -77,7 +77,7 @@ function App() {
       setNewsData(data);
       setData(data.slice(0, 3));
       setSearch('results');
-    }
+    } else { setSearch(''); }
   }, [setData, setSearch]);
 
   const reset = useCallback(() => {
@@ -225,7 +225,7 @@ function App() {
   useEffect(() => {
     checkCookie();
     checkStorage();
-  }, [checkCookie, checkStorage, history]);
+  }, [checkCookie, checkStorage, history.location]);
 
   useEffect(() => {
     if (history.location.popup) {
@@ -291,6 +291,7 @@ function App() {
               setSearch={setSearch}
               getNews={getNewsFromApi}
               saveArticle={saveArticle}
+              removeFromStorage={removeFromStorage}
             />
           </Route>
 
