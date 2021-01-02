@@ -1,7 +1,8 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useContext } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Button from '../Button/Button';
-import months from '../../translations/ru/months';
 import './NewsCard.css';
 import Tooltip from '../Tooltip/Tooltip';
 import Logo from '../Logo/Logo';
@@ -9,6 +10,9 @@ import Logo from '../Logo/Logo';
 function NewsCard({
   card, isLoggedIn, saveArticle, removeArticle,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+  const { t } = useTranslation('common');
+
   const {
     keyword,
     title,
@@ -24,11 +28,11 @@ function NewsCard({
 
   const formatDate = useCallback((value) => {
     const newDate = new Date(value);
-    const day = newDate.getDate();
-    const month = months[newDate.getMonth()];
-    const year = newDate.getFullYear();
-    return `${day} ${month}, ${year}`;
-  }, []);
+    let lang;
+    if (currentUser.lang === 'ru') lang = 'ru-RU';
+    else if (currentUser.lang === 'en') lang = 'en-US';
+    return newDate.toLocaleDateString(lang, { day: 'numeric', month: 'long', year: 'numeric' });
+  }, [currentUser]);
 
   const cleanDescription = (txt) => txt.replace(/(http\S+)/g, '');
 
@@ -67,7 +71,7 @@ function NewsCard({
         <Route path="/saved-news">
           {keyword && <p className="news-card__tag">{keyword}</p>}
           <Tooltip bigger forwardedRef={tooltip}>
-            Убрать из сохраненных
+            {t('tooltips.trash')}
           </Tooltip>
           <Button
             onMouseEnter={showTooltip}
@@ -80,7 +84,7 @@ function NewsCard({
         <Route path="/">
           {!isLoggedIn && (
             <Tooltip forwardedRef={tooltip}>
-              Войдите, чтобы сохранять статьи
+              {t('tooltips.add')}
             </Tooltip>
           )}
           <Button
