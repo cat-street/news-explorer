@@ -2,8 +2,8 @@ const PAGE_SIZE = 100;
 const DAYS_INTERVAL = 7;
 
 const newsApiConfig = {
-  KEY: '73d5afb0ad454c49b9be582794c88751',
-  BASE_PATH: 'https://newsapi.org/v2/everything',
+  KEY: process.env.REACT_APP_API_KEY,
+  BASE_PATH: 'https://nomoreparties.co/news/v2/everything',
   PARAMETERS: `&pageSize=${PAGE_SIZE}`,
 };
 
