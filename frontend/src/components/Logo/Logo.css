@@ -1,0 +1,27 @@
+.logo {
+  font-size: 16px;
+  font-family: 'Roboto Slab', 'Georgia', serif;
+  font-weight: 700;
+}
+
+.logo_card {
+  color: #fff;
+  font-size: 32px;
+  opacity: .8;
+}
+
+@media all and (min-width: 520px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .logo_card {
+    font-size: 28px;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .logo_card {
+    font-size: 36px;
+  }
+}

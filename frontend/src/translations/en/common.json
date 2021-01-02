@@ -1,0 +1,19 @@
+{
+	"buttons": {
+		"auth": "Login",
+		"login": "Log In",
+		"logout": "Log out",
+		"register": "Sign Up",
+		"search": "Search",
+		"showMore": "Show more"
+	},
+	"navigation": {
+		"bookmarks": "Bookmarks",
+		"home": "Home",
+		"practicum": "Yandex.Practicum"
+	},
+	"tooltips": {
+		"add": "Login to add bookmarks",
+		"trash": "Remove from bookmarks"
+	}
+}

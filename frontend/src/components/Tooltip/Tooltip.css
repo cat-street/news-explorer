@@ -1,0 +1,47 @@
+.tooltip {
+  position: absolute;
+  top: 16px;
+  right: 61px;
+  padding: 0 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+
+  border-radius: 10px;
+
+  font-size: 10px;
+  font-family: 'Roboto', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 500;
+
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.2);
+
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 200ms ease-out, opacity 200ms ease-out;
+}
+
+.tooltip_bigger {
+  font-size: 12px;
+}
+
+.tooltip_visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media all and (min-width: 520px) {
+  .tooltip {
+    top: 8px;
+    right: 53px;
+    margin-left: 8px;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .tooltip {
+    top: 24px;
+    right: 69px;
+  }
+}

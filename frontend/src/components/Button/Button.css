@@ -1,0 +1,127 @@
+.button {
+  border: 0;
+
+  transition: all 200ms ease-out;
+
+  cursor: pointer;
+}
+
+.button_type_text {
+  display: block;
+  padding: 19px;
+  width: 100%;
+
+  border-radius: 100px;
+
+  font-family: 'Roboto', 'Arial', 'Helvetica', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.button_type_text:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, .5),
+    0 0 0 4px rgba(255, 255, 255, .8);
+}
+
+.button_type_icon-square {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+}
+
+.button_type_icon-square:focus {
+  outline: none;
+}
+
+.button_icon-type_bookmark-normal {
+  background: url('../../images/bookmark_normal.svg') center center no-repeat, #fff;
+}
+
+.button_icon-type_bookmark-normal:hover {
+  background: url('../../images/bookmark_hover.svg') center center no-repeat, #fff;
+}
+
+.button_icon-type_bookmark-marked,
+.button_icon-type_bookmark-marked:hover {
+  background: url('../../images/bookmark_marked.svg') center center no-repeat, #fff;
+}
+
+.button_icon-type_trash {
+  background: url('../../images/trash-light.svg') center center no-repeat, #fff;
+}
+
+.button_icon-type_trash:hover {
+  background-image: url('../../images/trash-dark.svg');
+}
+
+.button_type_close {
+  display: block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: -40px;
+  right: 16px;
+
+  background: url('../../images/close.svg') center center no-repeat;
+}
+
+.button_type_close:hover {
+  opacity: .75;
+}
+
+.button__logged-in {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.button__title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.button__exit-icon {
+  flex-shrink: none;
+}
+
+@media all and (min-width: 520px) {
+  .button_type_text {
+    width: auto;
+  }
+
+  .button_type_icon-square {
+    right: 8px;
+    top: 8px;
+  }
+
+  .button_type_close {
+    width: 40px;
+    height: 40px;
+    top: -46px;
+    right: 0px;
+  }
+}
+
+@media all and (min-width: 550px) {
+  .button_type_close {
+    right: -46px;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .button_type_icon-square {
+    right: 24px;
+    top: 24px;
+  }
+}

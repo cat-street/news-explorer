@@ -1,0 +1,15 @@
+.main__title {
+  padding-top: 32px;
+}
+
+@media all and (min-width: 520px) {
+  .main__title {
+    padding-top: 40px;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .main__title {
+    padding-top: 80px;
+  }
+}

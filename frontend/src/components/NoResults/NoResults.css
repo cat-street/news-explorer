@@ -1,0 +1,48 @@
+.no-results {
+  padding: 86px 0 80px;
+
+  background-color: #F5F6F7;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-results__title {
+  margin-top: 32px;
+  margin-bottom: 16px;
+
+  font-size: 26px;
+  font-family: 'Roboto Slab', 'Georgia', 'Times', serif;
+  font-weight: 400;
+  color: #1A1B22;
+}
+
+.no-results__title_error {
+  margin-top: 0;
+}
+
+.no-results__text {
+  max-width: 320px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  font-size: 18px;
+  font-family: 'Roboto', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  color: #B6BCBF;
+  text-align: center;
+}
+
+.no-results__text_error {
+  max-width: 980px;
+  padding: 0 40px;
+}
+
+@media all and (min-width: 520px) {
+  .no-results__text_error {
+    padding: 0 16px;
+  }
+}
