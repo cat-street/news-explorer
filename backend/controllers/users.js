@@ -68,7 +68,7 @@ const login = async (req, res, next) => {
         maxAge: 604800000,
         httpOnly: true,
         secure: true,
-        sameSite: 'none',
+        sameSite: true,
       })
       .send(user);
   } catch (err) {
@@ -83,7 +83,7 @@ const logout = async (_req, res, next) => {
         maxAge: -1,
         httpOnly: true,
         secure: true,
-        sameSite: 'none',
+        sameSite: true,
       })
       .send({ message: 'Logged out' });
   } catch (err) {
