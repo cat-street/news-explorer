@@ -1,26 +1,23 @@
+import { useTranslation } from 'react-i18next';
 import Container from '../Container/Container';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './About.css';
 import author from '../../images/author.jpg';
 
 function About() {
+  const { t } = useTranslation('main');
+
   return (
     <section className="about">
       <Container mixinClass="about__container">
-        <img className="about__avatar" src={author} alt="Автор проекта" />
+        <img className="about__avatar" src={author} alt={t('about.author')} />
         <div className="about__description">
-          <SectionTitle mixinClass="about__title" title="Об авторе" />
+          <SectionTitle mixinClass="about__title" title={t('about.title')} />
           <p className="about__text">
-            Этот проект написал талантливый кот Саймон, первый кот-разработчик в
-            мире. Саймон владеет технологиями веб-разработки в широком диапазоне
-            на стороне фронт- и бэкенда, такими, например, как JavaScript,
-            React, Node, Express, MongoDB, но при этом мало ест и не
-            требователен к условиям работы.
+            {t('about.description1')}
           </p>
           <p className="about__text">
-            За кошачьи годы обучения в Яндекс.Практикуме Саймон усвоил суровые
-            истины мира технологий, и теперь готов помочь потенциальным
-            заказчикам, взяв контроль над их офисом свои лапы.
+            {t('about.description2')}
           </p>
         </div>
       </Container>

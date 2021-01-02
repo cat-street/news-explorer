@@ -1,0 +1,27 @@
+{
+	"errors": {
+		"searchError": "Error",
+		"searchNoKeyword": "You should enter a search keyword",
+		"searchNoResults": "No results to show",
+		"searchNoResultsDescription": "Unfortunately, your search request returned no results",
+		"searchServerError": "An error occurred during the search request. The server may be unavailable now. Please, try again later."
+	},
+	"labels": {
+		"email": "Email",
+		"name": "Name",
+		"password": "Password"
+	},
+	"or": "or",
+	"placeholders": {
+		"email": "Enter your email",
+		"name": "Enter your name",
+		"password": "Enter your password",
+		"search": "Enter a search topic"
+	},
+	"titles": {
+		"login": "Login",
+		"register": "Registration",
+		"searchResults": "Search Results",
+		"success": "Successfully signed up!"
+	}
+}

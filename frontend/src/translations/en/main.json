@@ -1,0 +1,18 @@
+{
+	"about": {
+		"author": "Project creator",
+		"description1": "This project has been written by an extraordinary cat Simon, the first developer cat in the world. Simon has a broad experience in frontend and backend development, has a deep knowledge of JavaScript, React, Node, Express, MongoDB, and he also doesn't eat much.",
+		"description2": "While studying for many cat years at coding bootcamp, Simon learned the hard truths about developers' world, and now he's ready to take control of your office in his skillful paws.",
+		"title": "About"
+	},
+	"bookmarks": {
+		"keywords": "Your keywords:",
+		"subtitle": "Bookmarks",
+		"titlePart1": "you have",
+		"titlePart2": "bookmarked articles"
+	},
+	"hero": {
+		"description": "Search the latest news on any topic and save them to your bookmarks.",
+		"title": "What's going on in the world?"
+	}
+}

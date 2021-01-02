@@ -31,7 +31,7 @@ function App() {
   const [openedPopup, setOpenedPopup] = useState('');
 
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: '', _id: null });
+  const [currentUser, setCurrentUser] = useState({ name: '', _id: null, lang: 'en' });
   const [newUser, setNewUser] = useState({ email: '', password: '', name: '' });
 
   const changeTheme = (value) => {
@@ -52,6 +52,10 @@ function App() {
 
   const setSearch = useCallback((status) => {
     setSearchStatus(status);
+  }, []);
+
+  const setLanguage = useCallback((lang) => {
+    setCurrentUser((user) => ({ ...user, lang }));
   }, []);
 
   const openPopup = (popup) => {
@@ -90,7 +94,7 @@ function App() {
 
   const getNewsFromApi = async (queue) => {
     setSearch('searching');
-    const data = await newsApi.getData(queue);
+    const data = await newsApi.getData(queue, currentUser.lang);
     if (data.articles.length === 0) {
       setSearch('no results');
       return;
@@ -178,10 +182,11 @@ function App() {
       if (response) {
         resetForm();
         setApiError('');
-        setCurrentUser({
+        setCurrentUser((prevUser) => ({
+          ...prevUser,
           name: response.name,
           _id: response._id,
-        });
+        }));
         setNewUser({ email: '', password: '', name: '' });
         setLoggedIn(true);
         setOpenedPopup('');
@@ -196,10 +201,11 @@ function App() {
       await mainApi.get(apiRoutes.SIGNOUT);
       setLoggedIn(false);
       setMenuOpened(false);
-      setCurrentUser({
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
         name: '',
         _id: null,
-      });
+      }));
       reset();
       history.push('/');
     } catch (err) {
@@ -212,10 +218,11 @@ function App() {
     try {
       const response = await mainApi.get(apiRoutes.SELF);
       setLoggedIn(true);
-      setCurrentUser({
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
         name: response.name,
         _id: response._id,
-      });
+      }));
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err.message);
@@ -249,6 +256,7 @@ function App() {
           openPopup={openPopup}
           openedPopup={openedPopup}
           signOut={signOut}
+          setLanguage={setLanguage}
         />
         {menuOpened && <Backdrop closePopup={closePopup} />}
 

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '../Button/Button';
 import useFormWithValidation from '../../hooks/useForm';
 import './AuthForm.css';
@@ -14,6 +15,8 @@ function AuthForm({
   onChange,
   apiError,
 }) {
+  const { t } = useTranslation('forms');
+
   const {
     values,
     handleChange,
@@ -39,26 +42,26 @@ function AuthForm({
     <form className="auth-form" onSubmit={onSubmit}>
       <h2 className="auth-form__title popup__title">{title}</h2>
       <label className="auth-form__label" htmlFor="email">
-        Email
+        {t('labels.email')}
       </label>
       <input
         type="email"
         name="email"
         className="auth-form__input"
-        placeholder="Введите почту"
+        placeholder={t('placeholders.email')}
         onChange={handleFormChange}
         value={values.email || user.email || ''}
         required
       />
       <span className="auth-form__error">{errors.email || ''}</span>
       <label className="auth-form__label" htmlFor="password">
-        Пароль
+        {t('labels.password')}
       </label>
       <input
         type="password"
         name="password"
         className="auth-form__input"
-        placeholder="Введите пароль"
+        placeholder={t('placeholders.password')}
         minLength="6"
         onChange={handleFormChange}
         value={values.password || ''}
@@ -68,14 +71,14 @@ function AuthForm({
       {type === 'register' && (
         <>
           <label className="auth-form__label" htmlFor="name">
-            Имя
+            {t('labels.name')}
           </label>
           <input
             id="register-name"
             type="text"
             name="name"
             className="auth-form__input"
-            placeholder="Введите своё имя"
+            placeholder={t('placeholders.name')}
             minLength="2"
             maxLength="30"
             onChange={handleFormChange}
@@ -96,7 +99,7 @@ function AuthForm({
         {buttonName}
       </Button>
       <p className="auth-form__choice-text">
-        или{' '}
+        {t('or')}{' '}
         <button
           type="button"
           className="auth-form__link popup__link"

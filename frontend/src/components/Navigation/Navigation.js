@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import backToTop from '../../helpers/backToTop';
 import Button from '../Button/Button';
 import darkExitIcon from '../../images/exit-dark.svg';
 import lightExitIcon from '../../images/exit-light.svg';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './Navigation.css';
 
 function Navigation({
@@ -14,8 +15,10 @@ function Navigation({
   isLoggedIn,
   openPopup,
   signOut,
+  setLanguage,
 }) {
   const currentUser = useContext(CurrentUserContext);
+  const { t, i18n } = useTranslation('common');
 
   const hideMenu = () => {
     toggleMenu(false);
@@ -28,6 +31,12 @@ function Navigation({
       toggleMenu(false);
       openPopup('login');
     }
+  };
+
+  const handleLanguageClick = () => {
+    const lang = i18n.language === 'en' ? 'ru' : 'en';
+    i18n.changeLanguage(lang);
+    setLanguage(lang);
   };
 
   return (
@@ -45,7 +54,7 @@ function Navigation({
             onClick={hideMenu}
             activeClassName="navigation__link_active"
           >
-            Главная
+            {t('navigation.home')}
           </NavLink>
         </li>
         {isLoggedIn && (
@@ -56,10 +65,15 @@ function Navigation({
               onClick={hideMenu}
               activeClassName="navigation__link_active"
             >
-              Сохраненные статьи
+              {t('navigation.bookmarks')}
             </NavLink>
           </li>
         )}
+        <li className="navigation__item">
+          <button className="button" onClick={handleLanguageClick}>
+            {currentUser.lang}
+          </button>
+        </li>
       </ul>
       <Button
         type="button"
@@ -72,12 +86,10 @@ function Navigation({
             <img
               className="button__exit-icon"
               src={theme === 'light' ? darkExitIcon : lightExitIcon}
-              alt="Выйти"
+              alt={t('buttons.logout')}
             />
           </span>
-        ) : (
-          'Авторизоваться'
-        )}
+        ) : t('buttons.auth')}
       </Button>
     </nav>
   );

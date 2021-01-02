@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Button from '../Button/Button';
-import { months } from '../../lang/ru-ru';
+import months from '../../translations/ru/months';
 import './NewsCard.css';
 import Tooltip from '../Tooltip/Tooltip';
 import Logo from '../Logo/Logo';

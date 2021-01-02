@@ -8,8 +8,8 @@ const newsApi = {
   newsApiConfig,
   today,
   previousDate,
-  getData: async function getData(keyword) {
-    const params = `${this.newsApiConfig.PARAMETERS}&from=${this.previousDate}&to=${this.today}&apiKey=${this.newsApiConfig.KEY}`;
+  getData: async function getData(keyword, language) {
+    const params = `${this.newsApiConfig.PARAMETERS}&language=${language}&from=${this.previousDate}&to=${this.today}&apiKey=${this.newsApiConfig.KEY}`;
     const result = await fetch(`${this.newsApiConfig.BASE_PATH}?q=${keyword}${params}`);
     if (result.ok) {
       return result.json();

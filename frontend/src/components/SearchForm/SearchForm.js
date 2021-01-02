@@ -1,13 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import Button from '../Button/Button';
-import { errors } from '../../lang/ru-ru';
 import './SearchForm.css';
 
 function SearchForm({
   getNews, setSearch, resetCounter, removeFromStorage,
 }) {
+  const { t } = useTranslation(['forms', 'common']);
+  const searchError = t('forms:errors.searchNoKeyword');
+
   const handleFocus = (evt) => {
     const searchInput = evt.target;
-    if (searchInput.value === errors.SEARCH) {
+    if (searchInput.value === searchError) {
       searchInput.closest('form').reset();
     }
   };
@@ -17,11 +20,11 @@ function SearchForm({
     resetCounter();
     removeFromStorage();
     const searchInput = evt.target.search;
-    if (searchInput.value === errors.SEARCH) {
+    if (searchInput.value === searchError) {
       return;
     }
     if (!searchInput.value.trim()) {
-      searchInput.value = errors.SEARCH;
+      searchInput.value = searchError;
       return;
     }
     try {
@@ -37,12 +40,12 @@ function SearchForm({
         type="text"
         name="search"
         className="search-form__input"
-        placeholder="Введите тему новости"
+        placeholder={t('forms:placeholders.search')}
         onFocus={handleFocus}
         required
       />
       <Button buttonClass="button_type_text search-form__button" type="submit">
-        Искать
+        {t('common:buttons.search')}
       </Button>
     </form>
   );
