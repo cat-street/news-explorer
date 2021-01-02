@@ -21,7 +21,6 @@
 	"titles": {
 		"login": "Login",
 		"register": "Registration",
-		"searchResults": "Search Results",
 		"success": "Successfully signed up!"
 	}
 }

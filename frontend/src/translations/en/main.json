@@ -14,5 +14,6 @@
 	"hero": {
 		"description": "Search the latest news on any topic and save them to your bookmarks.",
 		"title": "What's going on in the world?"
-	}
+	},
+	"searchResults": "Search Results"
 }

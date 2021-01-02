@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Hero from '../Hero/Hero';
 import Preloader from '../Preloader/Preloader';
 import NoResults from '../NoResults/NoResults';
@@ -15,6 +16,7 @@ function Main({
   searchStatus,
   ...props
 }) {
+  const { t } = useTranslation('main');
   const counter = useRef(3);
 
   const showMore = () => {
@@ -40,7 +42,7 @@ function Main({
           showMore={showMore}
           {...props}
         >
-          <SectionTitle mixinClass="main__title" title="Результаты поиска" />
+          <SectionTitle mixinClass="main__title" title={t('searchResults')} />
         </News>
       )}
       <About />
