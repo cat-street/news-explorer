@@ -1,10 +1,11 @@
+import Spinner from '../Spinner/Spinner';
 import './Preloader.css';
 
-function Preloader() {
+function Preloader({ style, text = '' }) {
   return (
-    <div className="preloader">
-      <i className="preloader__circle"></i>
-      <p className="preloader__text">Идет поиск новостей...</p>
+    <div className="preloader" style={style}>
+      <Spinner />
+      <p className="preloader__text">{text}</p>
     </div>
   );
 }

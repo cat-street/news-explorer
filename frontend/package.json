@@ -16,8 +16,6 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "scp -r ./build/* root@185.185.71.119:/root/news/frontend/build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

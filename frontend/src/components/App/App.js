@@ -189,6 +189,7 @@ function App() {
         }));
         setNewUser({ email: '', password: '', name: '' });
         setLoggedIn(true);
+        localStorage.setItem('auth', true);
         setOpenedPopup('');
       }
     } catch (error) {
@@ -200,6 +201,7 @@ function App() {
     try {
       await mainApi.get(apiRoutes.SIGNOUT);
       setLoggedIn(false);
+      localStorage.removeItem('auth');
       setMenuOpened(false);
       setCurrentUser((prevUser) => ({
         ...prevUser,
@@ -224,8 +226,7 @@ function App() {
         _id: response._id,
       }));
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err.message);
+      localStorage.removeItem('auth');
     }
   }, []);
 
@@ -300,6 +301,7 @@ function App() {
               getNews={getNewsFromApi}
               saveArticle={saveArticle}
               removeFromStorage={removeFromStorage}
+              openPopup={openPopup}
             />
           </Route>
 

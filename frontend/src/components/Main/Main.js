@@ -31,7 +31,7 @@ function Main({
   return (
     <main className="main">
       <Hero resetCounter={resetCounter} {...props} />
-      {searchStatus === 'searching' && <Preloader />}
+      {searchStatus === 'searching' && <Preloader text={t('searchProgress')} />}
       {searchStatus === 'no results' && <NoResults type="nothing" />}
       {searchStatus === 'error' && <NoResults type="error" />}
       {searchStatus === 'results' && (

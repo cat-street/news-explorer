@@ -8,7 +8,7 @@ import Tooltip from '../Tooltip/Tooltip';
 import Logo from '../Logo/Logo';
 
 function NewsCard({
-  card, isLoggedIn, saveArticle, removeArticle,
+  card, isLoggedIn, saveArticle, removeArticle, openPopup,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const { t } = useTranslation('common');
@@ -93,7 +93,7 @@ function NewsCard({
             onMouseLeave={isLoggedIn ? null : hideTooltip}
             type="button"
             buttonClass="button button_type_icon-square button_icon-type_bookmark-normal"
-            onClick={isLoggedIn ? handleSave : undefined}
+            onClick={isLoggedIn ? handleSave : openPopup.bind(this, 'login')}
           />
         </Route>
       </Switch>
