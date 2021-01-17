@@ -34,7 +34,7 @@ function Navigation({
   };
 
   const handleLanguageClick = () => {
-    const lang = i18n.language === 'en' ? 'ru' : 'en';
+    const lang = i18n.language === 'en-US' ? 'ru-RU' : 'en-US';
     i18n.changeLanguage(lang);
     setLanguage(lang);
   };
@@ -71,7 +71,7 @@ function Navigation({
         )}
         <li className="navigation__item">
           <button className="button navigation__language-button" onClick={handleLanguageClick}>
-            {currentUser.lang}
+            {currentUser.lang.slice(0, 2)}
           </button>
         </li>
       </ul>

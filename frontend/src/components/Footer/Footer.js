@@ -25,7 +25,7 @@ function Footer() {
             <li className="footer__menu-item">
               <a
                 href={
-                  currentUser.lang === 'en'
+                  currentUser.lang === 'en-US'
                     ? 'https://practicum.yandex.com/'
                     : 'https://praktikum.yandex.ru/'
                 }

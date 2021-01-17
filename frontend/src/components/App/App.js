@@ -16,7 +16,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 
-function App() {
+function App({ language }) {
   const [newsData, setNewsData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [savedData, setSavedData] = useState([]);
@@ -31,7 +31,7 @@ function App() {
   const [openedPopup, setOpenedPopup] = useState('');
 
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: '', _id: null, lang: 'en' });
+  const [currentUser, setCurrentUser] = useState({ name: '', _id: null, lang: language || 'en-US' });
   const [newUser, setNewUser] = useState({ email: '', password: '', name: '' });
 
   const changeTheme = (value) => {

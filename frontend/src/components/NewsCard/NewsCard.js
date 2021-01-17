@@ -29,8 +29,8 @@ function NewsCard({
   const formatDate = useCallback((value) => {
     const newDate = new Date(value);
     let lang;
-    if (currentUser.lang === 'ru') lang = 'ru-RU';
-    else if (currentUser.lang === 'en') lang = 'en-US';
+    if (currentUser.lang === 'ru-RU') lang = 'ru-RU';
+    else if (currentUser.lang === 'en-US') lang = 'en-US';
     return newDate.toLocaleDateString(lang, { day: 'numeric', month: 'long', year: 'numeric' });
   }, [currentUser]);
 
