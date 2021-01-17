@@ -94,7 +94,7 @@ function App({ language }) {
 
   const getNewsFromApi = async (queue) => {
     setSearch('searching');
-    const data = await newsApi.getData(queue, currentUser.lang);
+    const data = await newsApi.getData(queue, currentUser.lang.slice(0, 2));
     if (data.articles.length === 0) {
       setSearch('no results');
       return;
