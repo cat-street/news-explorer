@@ -93,7 +93,7 @@ function NewsCard({
             onMouseLeave={isLoggedIn ? null : hideTooltip}
             type="button"
             buttonClass="button button_type_icon-square button_icon-type_bookmark-normal"
-            onClick={isLoggedIn ? handleSave : openPopup.bind(this, 'login')}
+            onClick={isLoggedIn ? handleSave : () => openPopup('login')}
           />
         </Route>
       </Switch>
