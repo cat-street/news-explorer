@@ -109,7 +109,7 @@ function NewsCard({
             {formatDate(date)}
           </time>
           <h3 className="news-card__title">{title}</h3>
-          <p className="news-card__text">{cleanDescription(text)}</p>
+          <p className="news-card__text">{text && cleanDescription(text)}</p>
           <p className="news-card__source">{source}</p>
         </a>
       </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import Container from '../Container/Container';
 import NewsCard from '../NewsCard/NewsCard';
 import './News.css';
@@ -11,6 +12,8 @@ function News({
   children,
   ...props
 }) {
+  const { t } = useTranslation('common');
+
   return (
     <section className="news">
       <Container>
@@ -30,7 +33,7 @@ function News({
             buttonClass="button_type_text news__button"
             onClick={showMore}
           >
-            Показать еще
+            {t('buttons.showMore')}
           </Button>
         )}
       </Container>
